@@ -4,6 +4,8 @@ import { SpotifyService } from '../../services/spotify.service';
 
 
 
+
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -12,6 +14,7 @@ import { SpotifyService } from '../../services/spotify.service';
 export class HomeComponent implements OnInit {
   // paises: any[] = [];
   nuevasCanciones: any [] = [];
+  loading: boolean ;
   constructor( // private http: HttpClient
         private spotify: SpotifyService
     ) {
@@ -21,9 +24,11 @@ export class HomeComponent implements OnInit {
     });
     */
      // this.spotify.getToken();
+     this.loading = true;
      this.spotify.getNewRelease().subscribe( (data: any) => {
-        console.log(data.albums.items);
-         this.nuevasCanciones = data.albums.items;
+        console.log(data);
+         this.nuevasCanciones = data;
+         this.loading = false;
      });
    }
 
